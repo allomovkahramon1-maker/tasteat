@@ -1,570 +1,417 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const animatedElements = document.querySelectorAll(`
-        .section__info,
-        .section__info2,
-        .section__text,
-        .section__text2,
-        .section__josefine,
-        .section__try,
-        .section__starters,
-        .testimonial-header,
-        .section6 .image,
-        .section__offers,
-        .section__b__img,
-        .section__b__img2,
-        .section__card,
-        .section__stage,
-        .section__open .card,
-        .card__section,
-        .reservation,
-        .footer__left,
-        .footer__center,
-        .footer__right
-    `);
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show-animation");
-            } else {
-                // Ekrandan chiqsa animatsiyani qayta tayyorlaydi
-                entry.target.classList.remove("show-animation");
-            }
-        });
-    }, {
-        threshold: 0.15
-    });
-
-    animatedElements.forEach(element => {
-        observer.observe(element);
-    });
-});
-
-
-
-
-//
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
+    
+    /* ================= TRANSLATIONS ================= */
+ 
     const translations = {
-        en: {
-            "Call - 123 456 789": "Call - 123 456 789",
-            "Reservation": "Reservation",
-            "Home": "Home",
-            "About Us": "About Us",
-            "Our Menu": "Our Menu",
-            "Pages": "Pages",
-            "Blog": "Blog",
-            "Contact Us": "Contact Us",
 
-            "Welcome to Restaurant": "Welcome to Restaurant",
-            "The people, food and the prime locations make the perfect place good friends & family to come together and have great time.":
-                "The people, food and the prime locations make the perfect place good friends & family to come together and have great time.",
-            "View Menu": "View Menu",
+        uz: {
+            call: "Qo‘ng‘iroq - 123 456 789",
+            reservation: "Bron qilish",
+            home: "Bosh sahifa",
+            about_us: "Biz haqimizda",
+            our_menu: "Menyu",
+            pages: "Sahifalar",
+            blog: "Blog",
+            contact_us: "Bog‘lanish",
+            welcome: "Restoranimizga xush kelibsiz",
+            welcomeText: "Ajoyib odamlar, mazali taomlar va qulay joy do‘stlar hamda oila bilan vaqt o‘tkazish uchun mukammal muhit yaratadi.",
+            viewMenu: "Menyuni ko‘rish",
 
-            "Locate Us": "Locate Us",
-            "Riverside 25, San Diego, California":
-                "Riverside 25, San Diego, California",
-            "Open Hours": "Open Hours",
-            "Mon To Fri 9:00 AM - 9:00 PM":
-                "Mon To Fri 9:00 AM - 9:00 PM",
+            locateUs: "Manzilimiz",
+            openHours: "Ish vaqtimiz",
+            openTime: "Du - Ju 9:00 - 21:00",
 
-            "The Delicious Story": "The Delicious Story",
-            "Plan for this restaurant to deliver healthy food.":
-                "Plan for this restaurant to deliver healthy food.",
-            "Happily in the fourth year by fulfill the motto.":
-                "Happily in the fourth year by fulfill the motto.",
+            deliciousStory: "Mazali hikoyamiz",
+            storyText: "Ajoyib odamlar, mazali taomlar va qulay joy do‘stlar hamda oila bilan vaqt o‘tkazish uchun mukammal muhit yaratadi.",
+            planFood: "Restoranimizda sog‘lom va mazali taomlar tayyorlashni rejalashtirdik.",
+            fourthYear: "To‘rtinchi yilimizda ham o‘z shiorimizga sodiq holda faoliyat yuritmoqdamiz.",
 
-            "Menu": "Menu",
-            "Try Our Special dishes": "Try Our Special dishes",
-            "Every time you perfectly dine with us, it should happy for great inspired food in an environment designed with individual touches unique to the local area.":
-                "Every time you perfectly dine with us, it should happy for great inspired food in an environment designed with individual touches unique to the local area.",
-            "See all dishes": "See all dishes",
+            menu: "Menyu",
+            specialDishes: "Maxsus taomlarimizni tatib ko‘ring",
+            specialDishesText: "Har safar biz bilan ovqatlanganingizda mazali taomlar va ajoyib muhitdan bahramand bo‘ling.",
+            seeAllDishes: "Barcha taomlarni ko‘rish",
 
-            "Starters": "Starters",
-            "Raw Scallops from Erquy": "Raw Scallops from Erquy",
-            "Spring Roll": "Spring Roll",
-            "French Onion Soup": "French Onion Soup",
-            "Tomato Bruschetta": "Tomato Bruschetta",
+            starters: "Gazakslar",
+            rawScallops: "Erquydan xom taroqchalar",
+            springRoll: "Spring roll",
+            frenchSoup: "Fransuz piyoz sho‘rvasi",
+            tomatoBruschetta: "Pomidorli brusketta",
 
-            "Main Dish": "Main Dish",
-            "Grilled Salmon with Dill Sauce": "Grilled Salmon with Dill Sauce",
-            "Roast Beef with Vegetable": "Roast Beef with Vegetable",
-            "Marrkesh Vegetetarian Curruy": "Marrkesh Vegetetarian Curruy",
-            "Spicy Vegan Potato Curry": "Spicy Vegan Potato Curry",
+            mainDish: "Asosiy taomlar",
+            grilledSalmon: "Grilda pishirilgan losos va ukrop sousi",
+            roastBeef: "Sabzavotli rostbif",
+            vegetarianCurry: "Marokashcha sabzavotli karri",
+            veganPotato: "Achchiq vegan kartoshka karri",
 
-            "Dessert": "Dessert",
-            "Apple Pie with Cream": "Apple Pie with Cream",
-            "Lemon Meringue Pie": "Lemon Meringue Pie",
+            dessert: "Desert",
+            applePie: "Qaymoqli olma pirogi",
+            lemonPie: "Limonli merenga pirogi",
 
-            "Testimonial": "Testimonial",
-            "Our Clients Say": "Our Clients Say",
-            "We love to hear from customers, so please leave a comment or say hello in an email.":
-                "We love to hear from customers, so please leave a comment or say hello in an email.",
+            testimonial: "Mijozlar fikri",
+            clientsSay: "Mijozlarimiz nima deydi",
+            testimonialText: "Mijozlarimiz fikrlarini eshitishni yaxshi ko‘ramiz.",
 
-            "offers": "offers",
-            "Our Offer dishes": "Our Offer dishes",
-            "Our chefs create melt-in-your-mouth dishes that'll satiate even the fussiest eaters now the dishes are in offers use it based on hunger.":
-                "Our chefs create melt-in-your-mouth dishes that'll satiate even the fussiest eaters now the dishes are in offers use it based on hunger.",
+            offers: "Takliflar",
+            offerDishes: "Maxsus takliflarimiz",
+            offer50: "50% chegirma",
+            chickenBurger: "Tovuqli burger",
+            chickenPizza: "Tovuqli pitsa",
 
-            "50% Offer Going": "50% Offer Going",
-            "Chicken Burger": "Chicken Burger",
-            "Chicken burger with the tasty toppings and leaves.":
-                "Chicken burger with the tasty toppings and leaves.",
-            "Chicken Pizza": "Chicken Pizza",
-            "Pizza with multiple flavor and the toping are mixed.":
-                "Pizza with multiple flavor and the toping are mixed.",
+            popularDishes: "Mashhur taomlar",
+            chickenManjoori: "Chicken Manjoori",
+            hotdog: "Hot-dog",
+            freshSalmon: "Yangi losos",
+            vegBurger: "Sabzavotli burger",
 
-            "Popular Dishes": "Popular Dishes",
-            "Chicken Manjoori": "Chicken Manjoori",
-            "Hotdog": "Hotdog",
-            "Fresh Salmon": "Fresh Salmon",
-            "Veg Burger": "Veg Burger",
+            whatWeOffer: "Biz nimalarni taklif qilamiz",
+            greatServices: "Ajoyib xizmatlarimiz",
+            opened247: "24/7 ochiq",
+            specialMenus: "Maxsus menyular",
+            homeDelivery: "Uyga yetkazib berish",
 
-            "Dish relished by all age groups as a starter dish at parties.":
-                "Dish relished by all age groups as a starter dish at parties.",
-            "Grilled sausage served in the slit of a partially sliced bun.":
-                "Grilled sausage served in the slit of a partially sliced bun.",
-            "Beat the health blues with our Super Immune Blue Juice Recipe.":
-                "Beat the health blues with our Super Immune Blue Juice Recipe.",
-            "Burgers may be made from ingredients like beans.":
-                "Burgers may be made from ingredients like beans.",
+            firstReadNews: "Yangiliklarni birinchi bo‘lib o‘qing",
+            delicious: "Mazali",
+            cooking: "Pazandachilik",
+            viewMore: "Batafsil",
 
-            "What we offer": "What we offer",
-            "Our Great Services": "Our Great Services",
-            "The atmosphere set the stage. It’s about more than just a dining room away from your home. food takes the spotlight as guests.":
-                "The atmosphere set the stage. It’s about more than just a dining room away from your home. food takes the spotlight as guests.",
+            reservationTitle: "BRON QILISH",
+            bookYourTable: "Stolingizni bron qiling",
+            name: "Ism",
+            email: "Email",
+            persons: "Mehmonlar soni",
+            timing: "Vaqt",
+            date: "Sana",
+            bookTable: "Stolni bron qilish",
 
-            "Opened 24/7": "Opened 24/7",
-            "Special Menus": "Special Menus",
-            "Home Delivery": "Home Delivery",
+            contact: "BOG‘LANISH",
+            workingHours: "ISH VAQTI",
+            mondayFriday: "Du - Ju:",
+            saturday: "Shan:",
+            sunday: "Yak:",
 
-            "Be First Who Read News": "Be First Who Read News",
-            "Explore the latest stories about our dishes, offers, events and future plans here.":
-                "Explore the latest stories about our dishes, offers, events and future plans here.",
-            "Delicious": "Delicious",
-            "Cooking": "Cooking",
-            "View More": "View More",
+            subscribe: "Obuna bo‘lish",
+            styleguide: "Stil qo‘llanmasi",
+            licenses: "Litsenziyalar",
+            protected: "Himoyalangan",
+            notFound: "Topilmadi",
+            paragraph0: "Qisqichbaqasimon taroqni ustritsa kabi tozalang.",
+            paragraph1: "Qizigan tovaga yog‘ soling, so‘ng ko‘k piyozning oq qismini qo‘shing.",
+            paragraph2: "Bug‘doy uni, olma sirkasi, non.",
+            paragraph3: "Non, zaytun moyi, sarimsoq, qora murch.",
+            paragraph4: "Jigarrang shakar, losos filesi, Dijon xantali.",
+            paragraph5: "Yashil loviya, ribay go‘shti, zaytun moyi, mol go‘shti.",
+            paragraph6: "Shirin kartoshka, baqlajon, no‘xat (garbanzo loviyasi).",
+            paragraph7: "Kokos suti, loviya, kartoshka, karri kukuni.",
+            paragraph8: "Qaymoq, tuxum oqi, dolchin.",
+            paragraph9: "Muzlatilgan pirog xamiri, merenga, limon.",
 
-            "The Legend of US Cuisine: The Story of Hungry People":
-                "The Legend of US Cuisine: The Story of Hungry People",
-            "The Most Popular Delicious Food of Mediterranean Cuisine":
-                "The Most Popular Delicious Food of Mediterranean Cuisine",
+            paragraph10: "Mijozlarimizning fikrlarini eshitishni yaxshi ko‘ramiz, shuning uchun izoh qoldiring yoki elektron pochta orqali salom yo‘llang.",
+            paragraph11: "Ular ajoyib ta’mi va mazali taomlari bilan mashhur. Qayerga bormang, ochligingiz qondiriladi. Eng mazali tovuq go‘shti va burgerlar — juda ham lazzatli.",
+            paragraph12: "Men bu ajoyib restoranga bir necha bor tashrif buyurganman. Taomlari nihoyatda mazali, xizmatdagi har bir detalga e’tibor berishlari esa juda yuqori darajada.",
+            paragraph13: "Ajoyib ta’mi va mazali taomlari bilan mashhur. Qayerda bo‘lmang, ochligingiz qondiriladi. Ular eng mazali qovurilgan tovuq va burgerlarni tayyorlashadi.",
+            paragraph14: "Shinam bar va samimiy ovqatlanish hududiga ega restoran. Taomlari ajoyib, qiziqarli, juda innovatsion va professional darajada tayyorlangan.",
+            paragraph15: "Oshpazlarimiz og‘izda eriydigan, hatto eng injiq mijozlarni ham qoniqtiradigan taomlarni tayyorlaydilar. Hozir ushbu taomlar takliflar bo‘limida mavjud — ochligingizga qarab tanlang.",
 
-            "RESERVATION": "RESERVATION",
-            "Book Your Table": "Book Your Table",
-            "Name": "Name",
-            "Email": "Email",
-            "Persons": "Persons",
-            "Timing": "Timing",
-            "Date": "Date",
-            "Book A Table": "Book A Table",
-
-            "#TheTastEat": "#TheTastEat",
-            "CONTACT": "CONTACT",
-            "WORKING HOURS": "WORKING HOURS",
-            "Mon - Fri:": "Mon - Fri:",
-            "Sat:": "Sat:",
-            "Sun:": "Sun:",
-            "Join our mailing list for updates, Get news & offers events.":
-                "Join our mailing list for updates, Get news & offers events.",
-            "Subscribe": "Subscribe",
-            "Styleguide": "Styleguide",
-            "Licenses": "Licenses",
-            "Protected": "Protected",
-            "Not Found": "Not Found"
+            paragraph16: "Restoranda ofitsiantlar o‘rtasida kim har bir stolga taomni eng tez yetkazib berishi bo‘yicha musobaqa bor. Bu esa Ginnes rekordini o‘rnatishga urinishga olib keldi.",
+            chicken1: "Mazali qo‘shimchalar va salat barglari bilan tayyorlangan tovuqli burger.",
+            chicken2: "Turli xil ta’mlarga ega, ustiga xilma-xil masalliqlar qo‘shilgan pitsa.",
+            title: "Barcha yoshdagilar ziyofatlarda ishtaha ochuvchi taom sifatida sevib iste’mol qiladigan taom.",
+            title2: "Qisman kesilgan bulochka ichiga solingan grilda pishirilgan kolbasa.",
+            title3: "Sog‘liqdagi muammolarga qarshi bizning “Super Immunitet” ko‘k sharbat retseptimizdan bahramand bo‘ling.",
+            title4: "Burgerlar loviya kabi masalliqlardan tayyorlanishi mumkin.",
+            title5: "Atmosfera o‘ziga xos muhit yaratadi. Bu shunchaki uydan tashqaridagi ovqatlanish xonasi emas. Bu yerda mehmonlar uchun asosiy e’tibor taomlarga qaratiladi.",
+            title6: "Bu yerda taomlarimiz, takliflarimiz, tadbirlarimiz va kelajakdagi rejalarimiz haqidagi eng so‘nggi yangiliklarni bilib oling.",
+            titleh3: "AQSh oshxonasi afsonasi: Och odamlar hikoyasi.",
+            p_text: "Oson amalga oshiriladigan imkoniyatlardan foydalanib, taxminiy iqtisodiy qiymatni va qo‘shimcha qiymat matritsasini aniqlang. Oziq-ovqat sifatini yaxshilash uchun ijodiy faoliyatni beta-testdan o‘tkazing.",
+            title_1_h3: "O‘rta yer dengizi oshxonasining eng mashhur va mazali taomlari.",
+            p_text2: "Yangiliklardan xabardor bo‘lish uchun bizning elektron pochta xabarlarimizga obuna bo‘ling. Yangiliklar, maxsus takliflar va tadbirlar haqida ma’lumot oling.",
         },
 
         ru: {
-            "Call - 123 456 789": "Позвонить - 123 456 789",
-            "Reservation": "Бронирование",
-            "Home": "Главная",
-            "About Us": "О нас",
-            "Our Menu": "Наше меню",
-            "Pages": "Страницы",
-            "Blog": "Блог",
-            "Contact Us": "Связаться с нами",
+            call: "Позвонить - 123 456 789",
+            reservation: "Бронирование",
+            home: "Главная",
+            about_us: "О нас",
+            our_menu: "Меню",
+            pages: "Страницы",
+            blog: "Блог",
+            contact_us: "Связаться с нами",
 
-            "Welcome to Restaurant": "Добро пожаловать в ресторан",
-            "The people, food and the prime locations make the perfect place good friends & family to come together and have great time.":
-                "Люди, вкусная еда и отличное расположение делают это место идеальным для встреч с друзьями и семьёй.",
-            "View Menu": "Посмотреть меню",
+            welcome: "Добро пожаловать в ресторан",
+            welcomeText: "Люди, вкусная еда и отличное расположение делают это место идеальным для встреч с друзьями и семьёй.",
+            viewMenu: "Посмотреть меню",
 
-            "Locate Us": "Наш адрес",
-            "Riverside 25, San Diego, California":
-                "Riverside 25, Сан-Диего, Калифорния",
-            "Open Hours": "Часы работы",
-            "Mon To Fri 9:00 AM - 9:00 PM":
-                "Пн - Пт 9:00 - 21:00",
+            locateUs: "Наш адрес",
+            openHours: "Часы работы",
+            openTime: "Пн - Пт 9:00 - 21:00",
 
-            "The Delicious Story": "Наша вкусная история",
-            "Plan for this restaurant to deliver healthy food.":
-                "План — готовить для гостей полезную и вкусную еду.",
-            "Happily in the fourth year by fulfill the motto.":
-                "Уже четвёртый год мы с удовольствием следуем нашему девизу.",
+            deliciousStory: "Наша вкусная история",
+            storyText: "Люди, вкусная еда и отличное расположение создают идеальное место для встреч с друзьями и семьёй.",
+            planFood: "Мы планируем готовить для гостей полезную и вкусную еду.",
+            fourthYear: "Уже четвёртый год мы с удовольствием следуем нашему девизу.",
 
-            "Menu": "Меню",
-            "Try Our Special dishes": "Попробуйте наши фирменные блюда",
-            "Every time you perfectly dine with us, it should happy for great inspired food in an environment designed with individual touches unique to the local area.":
-                "Каждый визит к нам — это приятное впечатление от великолепной еды и уютной атмосферы.",
-            "See all dishes": "Посмотреть все блюда",
+            menu: "Меню",
+            specialDishes: "Попробуйте наши фирменные блюда",
+            specialDishesText: "Каждый раз, когда вы приходите к нам, вас ждут вкусные блюда и особенная атмосфера.",
+            seeAllDishes: "Посмотреть все блюда",
 
-            "Starters": "Закуски",
-            "Raw Scallops from Erquy": "Сырые гребешки из Эрки",
-            "Spring Roll": "Спринг-ролл",
-            "French Onion Soup": "Французский луковый суп",
-            "Tomato Bruschetta": "Томатная брускетта",
+            starters: "Закуски",
+            rawScallops: "Сырые гребешки из Эрки",
+            springRoll: "Спринг-ролл",
+            frenchSoup: "Французский луковый суп",
+            tomatoBruschetta: "Томатная брускетта",
 
-            "Main Dish": "Основные блюда",
-            "Grilled Salmon with Dill Sauce": "Лосось на гриле с укропным соусом",
-            "Roast Beef with Vegetable": "Ростбиф с овощами",
-            "Marrkesh Vegetetarian Curruy": "Марокканское овощное карри",
-            "Spicy Vegan Potato Curry": "Острое веганское картофельное карри",
+            mainDish: "Основные блюда",
+            grilledSalmon: "Лосось на гриле с укропным соусом",
+            roastBeef: "Ростбиф с овощами",
+            vegetarianCurry: "Марокканское овощное карри",
+            veganPotato: "Острое веганское картофельное карри",
 
-            "Dessert": "Десерт",
-            "Apple Pie with Cream": "Яблочный пирог со сливками",
-            "Lemon Meringue Pie": "Лимонный пирог с меренгой",
+            dessert: "Десерт",
+            applePie: "Яблочный пирог со сливками",
+            lemonPie: "Лимонный пирог с меренгой",
 
-            "Testimonial": "Отзывы",
-            "Our Clients Say": "Что говорят наши клиенты",
-            "We love to hear from customers, so please leave a comment or say hello in an email.":
-                "Мы любим получать отзывы от наших клиентов. Оставьте комментарий или напишите нам.",
+            testimonial: "Отзывы",
+            clientsSay: "Что говорят наши клиенты",
+            testimonialText: "Мы любим слышать мнение наших клиентов.",
 
-            "offers": "Предложения",
-            "Our Offer dishes": "Наши специальные предложения",
-            "50% Offer Going": "Скидка 50%",
-            "Chicken Burger": "Куриный бургер",
-            "Chicken burger with the tasty toppings and leaves.":
-                "Куриный бургер с вкусными начинками и свежей зеленью.",
-            "Chicken Pizza": "Куриная пицца",
-            "Pizza with multiple flavor and the toping are mixed.":
-                "Пицца с несколькими вкусами и разнообразными начинками.",
+            offers: "Предложения",
+            offerDishes: "Наши специальные предложения",
+            offer50: "Скидка 50%",
+            chickenBurger: "Куриный бургер",
+            chickenPizza: "Куриная пицца",
 
-            "Popular Dishes": "Популярные блюда",
-            "Chicken Manjoori": "Курица Манджури",
-            "Hotdog": "Хот-дог",
-            "Fresh Salmon": "Свежий лосось",
-            "Veg Burger": "Овощной бургер",
+            popularDishes: "Популярные блюда",
+            chickenManjoori: "Курица Манджури",
+            hotdog: "Хот-дог",
+            freshSalmon: "Свежий лосось",
+            vegBurger: "Овощной бургер",
 
-            "What we offer": "Что мы предлагаем",
-            "Our Great Services": "Наши отличные услуги",
-            "Opened 24/7": "Открыто 24/7",
-            "Special Menus": "Специальное меню",
-            "Home Delivery": "Доставка на дом",
+            whatWeOffer: "Что мы предлагаем",
+            greatServices: "Наши отличные услуги",
+            opened247: "Открыто 24/7",
+            specialMenus: "Специальное меню",
+            homeDelivery: "Доставка на дом",
 
-            "Be First Who Read News": "Будьте первым, кто узнает новости",
-            "Explore the latest stories about our dishes, offers, events and future plans here.":
-                "Узнайте больше о наших блюдах, предложениях, мероприятиях и планах.",
-            "Delicious": "Вкусное",
-            "Cooking": "Кулинария",
-            "View More": "Подробнее",
+            firstReadNews: "Будьте первым, кто узнает новости",
+            delicious: "Вкусное",
+            cooking: "Кулинария",
+            viewMore: "Подробнее",
 
-            "RESERVATION": "БРОНИРОВАНИЕ",
-            "Book Your Table": "Забронируйте столик",
-            "Name": "Имя",
-            "Email": "Электронная почта",
-            "Persons": "Количество гостей",
-            "Timing": "Время",
-            "Date": "Дата",
-            "Book A Table": "Забронировать столик",
+            reservationTitle: "БРОНИРОВАНИЕ",
+            bookYourTable: "Забронируйте столик",
+            name: "Имя",
+            email: "Электронная почта",
+            persons: "Количество гостей",
+            timing: "Время",
+            date: "Дата",
+            bookTable: "Забронировать столик",
 
-            "#TheTastEat": "#TheTastEat",
-            "CONTACT": "КОНТАКТЫ",
-            "WORKING HOURS": "ЧАСЫ РАБОТЫ",
-            "Join our mailing list for updates, Get news & offers events.":
-                "Подпишитесь на рассылку и получайте новости и специальные предложения.",
-            "Subscribe": "Подписаться",
-            "Styleguide": "Стайлгайд",
-            "Licenses": "Лицензии",
-            "Protected": "Защищённые",
-            "Not Found": "Не найдено"
+            contact: "КОНТАКТЫ",
+            workingHours: "ЧАСЫ РАБОТЫ",
+            mondayFriday: "Пн - Пт:",
+            saturday: "Сб:",
+            sunday: "Вс:",
+
+            subscribe: "Подписаться",
+            styleguide: "Стайлгайд",
+            licenses: "Лицензии",
+            protected: "Защищено",
+            notFound: "Не найдено",
+            paragraph0: "Очистите морской гребешок так же, как устрицы.",
+            paragraph1: "Добавьте масло в горячую сковороду, затем добавьте белую часть зелёного лука",
+            paragraph2: "Пшеничная мука, яблочный уксус, хлеб.",
+            paragraph3: "Хлеб, оливковое масло, чеснок, чёрный перец.",
+            paragraph4: "Коричневый сахар, филе лосося, дижонская горчица.",
+            paragraph5: "Зелёная фасоль, рибай, оливковое масло, говядина.",
+            paragraph6: "Сладкий картофель, баклажан, нут.",
+            paragraph7: "Кокосовое молоко, фасоль, картофель, порошок карри.",
+            paragraph8: "Сливки для взбивания, яичный белок, корица.",
+            paragraph9: "Замороженное тесто для пирога, меренга, лимон.",
+
+            paragraph10: "Мы любим слышать отзывы наших клиентов, поэтому оставьте комментарий или напишите нам по электронной почте.",
+            paragraph11: "Они известны своим потрясающим вкусом и отличной кухней. Куда бы вы ни пришли, ваш голод будет утолён. Лучшие куриные блюда и бургеры — это действительно очень вкусно.",
+            paragraph12: "Я несколько раз посещал этот замечательный ресторан. Еда здесь просто великолепна, а внимание к деталям находится на совершенно другом уровне.",
+            paragraph13: "Их блюда славятся своим великолепным вкусом. Где бы вы ни оказались, здесь вы точно сможете утолить голод. Они готовят лучшие жареные куриные блюда и бургеры.",
+            paragraph14: "Ресторан с уютным баром и камерной обеденной зоной. Еда потрясающая, интересная, очень оригинальная и приготовлена на профессиональном уровне.",
+            paragraph15: "Наши шеф-повара создают блюда, которые буквально тают во рту и способны удовлетворить даже самых привередливых гурманов. Сейчас эти блюда представлены в разделе предложений — выбирайте их в зависимости от вашего аппетита.",
+
+            paragraph16: "В ресторане официанты соревнуются между собой, кто быстрее подаст блюда к каждому столику. Это привело к попытке установить рекорд Гиннесса.",
+            chicken1: "Куриный бургер с вкусными добавками и листьями салата.",
+            chicken2: "Пицца с различными вкусами и разнообразными начинками.",
+            title: "Блюдо, которое нравится людям всех возрастов и подаётся в качестве закуски на вечеринках.",
+            title2: "Разрезанная вдоль булочка с жареной колбаской внутри.",
+            title3: "Победите проблемы со здоровьем с помощью нашего рецепта «Супериммунитет» — синего сока.",
+            title4: "Бургеры могут быть приготовлены из таких ингредиентов, как фасоль.",
+            title5: "Атмосфера создаёт особую обстановку. Это не просто место для приёма пищи вдали от дома. Здесь главную роль для гостей играет еда.",
+            title6: "Здесь вы можете узнать последние новости о наших блюдах, предложениях, мероприятиях и планах на будущее.",
+            titleh3: "Легенда американской кухни: История голодных людей.",
+            p_text: "Используйте простые возможности для определения примерной экономической ценности и креативной деятельности для бета-тестирования, чтобы улучшить качество еды.",
+            title_1_h3: "Самые популярные и вкусные блюда средиземноморской кухни.",
+            p_text2: "Подпишитесь на нашу рассылку, чтобы получать обновления, новости, специальные предложения и информацию о мероприятиях.",
         },
 
-        uz: {
-            "Call - 123 456 789": "Qo‘ng‘iroq - 123 456 789",
-            "Reservation": "Bron qilish",
-            "Home": "Bosh sahifa",
-            "About Us": "Biz haqimizda",
-            "Our Menu": "Menyumuz",
-            "Pages": "Sahifalar",
-            "Blog": "Blog",
-            "Contact Us": "Bog‘lanish",
+        en: {
 
-            "Welcome to Restaurant": "Restoranimizga xush kelibsiz",
-            "The people, food and the prime locations make the perfect place good friends & family to come together and have great time.":
-                "Ajoyib odamlar, mazali taomlar va qulay joy do‘stlar hamda oila bilan vaqt o‘tkazish uchun mukammal muhit yaratadi.",
-            "View Menu": "Menyuni ko‘rish",
+            call: "Call - 123 456 789",
+            reservation: "Reservation",
+            home: "Home",
+            about_us: "About Us",
+            our_menu: "Our Menu",
+            pages: "Pages",
+            blog: "Blog",
+            contact_us: "Contact Us",
 
-            "Locate Us": "Manzilimiz",
-            "Riverside 25, San Diego, California":
-                "Riverside 25, San Diego, Kaliforniya",
-            "Open Hours": "Ish vaqtimiz",
-            "Mon To Fri 9:00 AM - 9:00 PM":
-                "Dushanba - Juma 09:00 - 21:00",
-            "Reservation": "Bron qilish",
+            welcome: "Welcome to Restaurant",
+            welcomeText: "The people, food and the prime locations make the perfect place good friends & family to come together and have great time.",
+            viewMenu: "View Menu",
 
-            "The Delicious Story": "Mazali hikoyamiz",
-            "Plan for this restaurant to deliver healthy food.":
-                "Restoranimizda sog‘lom va mazali taomlar tayyorlashni rejalashtirdik.",
-            "Happily in the fourth year by fulfill the motto.":
-                "To‘rtinchi yilimizda ham o‘z shiorimizga sodiq holda faoliyat yuritmoqdamiz.",
+            locateUs: "Locate Us",
+            openHours: "Open Hours",
+            openTime: "Mon To Fri 9:00 AM - 9:00 PM",
 
-            "Menu": "Menyu",
-            "Try Our Special dishes": "Maxsus taomlarimizni tatib ko‘ring",
-            "Every time you perfectly dine with us, it should happy for great inspired food in an environment designed with individual touches unique to the local area.":
-                "Biz bilan har bir ovqatlanish mazali taomlar va o‘ziga xos qulay muhit bilan unutilmas bo‘lishi kerak.",
-            "See all dishes": "Barcha taomlarni ko‘rish",
+            deliciousStory: "The Delicious Story",
+            storyText: "The people, food and the prime locations make the perfect place for the friends & family to come together and have great time.",
+            planFood: "Plan for this restaurant to deliver healthy food.",
+            fourthYear: "Happily in the fourth year by fulfill the motto.",
 
-            "Starters": "Gazakslar",
-            "Raw Scallops from Erquy": "Erkudan xom taroqchalar",
-            "Spring Roll": "Spring roll",
-            "French Onion Soup": "Fransuz piyoz sho‘rvasi",
-            "Tomato Bruschetta": "Pomidorli brusketta",
+            menu: "Menu",
+            specialDishes: "Try Our Special dishes",
+            specialDishesText: "Every time you perfectly dine with us, enjoy great inspired food in a unique environment.",
+            seeAllDishes: "See all dishes",
 
-            "Main Dish": "Asosiy taomlar",
-            "Grilled Salmon with Dill Sauce": "Grilda pishirilgan losos va ukrop sousi",
-            "Roast Beef with Vegetable": "Sabzavotli rostbif",
-            "Marrkesh Vegetetarian Curruy": "Marokashcha sabzavotli karri",
-            "Spicy Vegan Potato Curry": "Achchiq vegan kartoshka karri",
+            starters: "Starters",
+            rawScallops: "Raw Scallops from Erquy",
+            springRoll: "Spring Roll",
+            frenchSoup: "French Onion Soup",
+            tomatoBruschetta: "Tomato Bruschetta",
 
-            "Dessert": "Desert",
-            "Apple Pie with Cream": "Qaymoqli olma pirogi",
-            "Lemon Meringue Pie": "Limonli merenga pirogi",
+            mainDish: "Main Dish",
+            grilledSalmon: "Grilled Salmon with Dill Sauce",
+            roastBeef: "Roast Beef with Vegetable",
+            vegetarianCurry: "Marrkesh Vegetetarian Curruy",
+            veganPotato: "Spicy Vegan Potato Curry",
 
-            "Testimonial": "Mijozlar fikri",
-            "Our Clients Say": "Mijozlarimiz nima deydi",
-            "We love to hear from customers, so please leave a comment or say hello in an email.":
-                "Mijozlarimiz fikrini eshitishni yaxshi ko‘ramiz. Izoh qoldiring yoki bizga email orqali yozing.",
+            dessert: "Dessert",
+            applePie: "Apple Pie with Cream",
+            lemonPie: "Lemon Meringue Pie",
 
-            "offers": "Takliflar",
-            "Our Offer dishes": "Maxsus takliflarimiz",
-            "50% Offer Going": "50% chegirma",
-            "Chicken Burger": "Tovuqli burger",
-            "Chicken burger with the tasty toppings and leaves.":
-                "Mazali qo‘shimchalar va yangi ko‘katlar bilan tayyorlangan tovuqli burger.",
-            "Chicken Pizza": "Tovuqli pitsa",
-            "Pizza with multiple flavor and the toping are mixed.":
-                "Turli xil ta’mlar va qo‘shimchalar bilan tayyorlangan pitsa.",
+            testimonial: "Testimonial",
+            clientsSay: "Our Clients Say",
+            testimonialText: "We love to hear from customers, so please leave a comment.",
 
-            "Popular Dishes": "Mashhur taomlar",
-            "Chicken Manjoori": "Chicken Manjoori",
-            "Hotdog": "Hot-dog",
-            "Fresh Salmon": "Yangi losos",
-            "Veg Burger": "Sabzavotli burger",
+            offers: "Offers",
+            offerDishes: "Our Offer dishes",
+            offer50: "50% Offer Going",
+            chickenBurger: "Chicken Burger",
+            chickenPizza: "Chicken Pizza",
 
-            "What we offer": "Biz nimalarni taklif qilamiz",
-            "Our Great Services": "Ajoyib xizmatlarimiz",
-            "Opened 24/7": "24/7 ochiq",
-            "Special Menus": "Maxsus menyular",
-            "Home Delivery": "Uyga yetkazib berish",
+            popularDishes: "Popular Dishes",
+            chickenManjoori: "Chicken Manjoori",
+            hotdog: "Hotdog",
+            freshSalmon: "Fresh Salmon",
+            vegBurger: "Veg Burger",
 
-            "Be First Who Read News": "Yangiliklarni birinchi bo‘lib o‘qing",
-            "Explore the latest stories about our dishes, offers, events and future plans here.":
-                "Taomlarimiz, takliflarimiz, tadbirlarimiz va kelajakdagi rejalarimiz haqidagi so‘nggi yangiliklarni o‘qing.",
-            "Delicious": "Mazali",
-            "Cooking": "Pazandachilik",
-            "View More": "Batafsil",
+            whatWeOffer: "What we offer",
+            greatServices: "Our Great Services",
+            opened247: "Opened 24/7",
+            specialMenus: "Special Menus",
+            homeDelivery: "Home Delivery",
 
-            "RESERVATION": "BRON QILISH",
-            "Book Your Table": "Stolingizni bron qiling",
-            "Name": "Ism",
-            "Email": "Email",
-            "Persons": "Mehmonlar soni",
-            "Timing": "Vaqt",
-            "Date": "Sana",
-            "Book A Table": "Stolni bron qilish",
+            firstReadNews: "Be First Who Read News",
+            delicious: "Delicious",
+            cooking: "Cooking",
+            viewMore: "View More",
 
-            "#TheTastEat": "#TheTastEat",
-            "CONTACT": "BOG‘LANISH",
-            "WORKING HOURS": "ISH VAQTI",
-            "Mon - Fri:": "Du - Ju:",
-            "Sat:": "Shan:",
-            "Sun:": "Yak:",
-            "Join our mailing list for updates, Get news & offers events.":
-                "Yangiliklar, chegirmalar va tadbirlar haqida ma’lumot olish uchun obuna bo‘ling.",
-            "Subscribe": "Obuna bo‘lish",
-            "Styleguide": "Stil qo‘llanmasi",
-            "Licenses": "Litsenziyalar",
-            "Protected": "Himoyalangan",
-            "Not Found": "Topilmadi"
+            reservationTitle: "RESERVATION",
+            bookYourTable: "Book Your Table",
+            name: "Name",
+            email: "Email",
+            persons: "Persons",
+            timing: "Timing",
+            date: "Date",
+            bookTable: "Book A Table",
+
+            contact: "CONTACT",
+            workingHours: "WORKING HOURS",
+            mondayFriday: "Mon - Fri:",
+            saturday: "Sat:",
+            sunday: "Sun:",
+
+            subscribe: "Subscribe",
+            styleguide: "Styleguide",
+            licenses: "Licenses",
+            protected: "Protected",
+            notFound: "Not Found",
+            paragraph0: "Shuck the scallop to that used for oysters",
+            paragraph1: "Add oil to a hot pan spring onion whites",
+            paragraph02: "Wheat flour, apple cider vinegar, bread",
+            paragraph3: "Bread, olive oil, garlic, black pepper",
+            paragraph4: "Brown sugar, salmon fillet, Dijon mustard",
+            paragraph5: "Green beans, rib eye, olive oil, beef",
+            paragraph6: "Sweet potato, eggplant, garbanzo bean",
+            paragraph7: "Coconut milk, beans, potatoes, curry powder",
+            paragraph8: "Whipping cream, egg white, cinnamon",
+            paragraph9: "Frozen pie crust, meringue, lemon",
+
+            paragraph10: "We love to hear from customers, so please leave a comment or say hello in an email.",
+            paragraph11: "They are known for their fabulous tasteand food.Anywhere you go your hunger is satisfied.The best chicken & burgers those are yummy.",
+            paragraph12: "I have visited this fantastic restaurant on several occasions.Food is absolutely outstanding and attention to detail is in league of its own.",
+            paragraph13: "Perfectly known for its fabulous taste and food.Anywhere your hunger is satisfied.They give the best fried chicken and burgers.",
+            paragraph14: "A restaurant with a lovely bar and intimate dining area.Food is sensational, exciting, highly innovative and professional.",
+            paragraph15: "Our chefs create melt-in-your-mouth dishes that'll satiate even the fussiest eaters now the dishes are in offers use it based on hunger.",
+            paragraph16: "There is a game between the waiters in restaurant to see who serves the food to each table fastest. That led to attempting the Guinness Record.",
+            chicken1: "Chicken burger with the tasty toppings and leaves.",
+            chicken2: "Pizza with multiple flavor and the toping are mixed.",
+            title: "Dish relished by all age groups as a starter dish at parties.",
+            title2: "Grilled sausage served in the slit of a partially sliced bun.",
+            title3: "Beat the health blues with our Super Immune Blue Juice Recipe.",
+            title4: "Burgers may be made from ingredients like beans.",
+            title5: "The atmosphere set the stage. It’s about more than just a dining room away from your home.food takes the spotlight as guests.",
+            title6: "Explore the latest stories about our dishes, offers, events and future plans here.",
+            titleh3: "The Legend of US Cuisine: The Story of Hungry People",
+            p_text: "Capitalize on low-hanging fruit to identify a ballpark value added matrix economically and the creative activity to beta test override the food quality.",
+            title_1_h3: "The Most Popular Delicious Food of Mediterranean Cuisine",
+            p_text2: "Join our mailing list for updates, Get news & offers events.",
         }
     };
 
 
-    // ==========================================
-    // ORIGINAL MATNLARNI SAQLAB QOLISH
-    // ==========================================
+    /* ================= TRANSLATE ================= */
 
-    const originalTexts = new WeakMap();
+    function translate(language) {
 
-    function saveOriginalText(element) {
-        if (!originalTexts.has(element)) {
-            originalTexts.set(element, element.textContent.trim());
-        }
-    }
+        document.querySelectorAll("[data-key]").forEach(el => {
 
+            const key = el.dataset.key;
+            const text = translations[language]?.[key];
 
-    // ==========================================
-    // TEXT NODE TARJIMA
-    // ==========================================
-
-    function translateTextNodes(language) {
-
-        const dictionary = translations[language];
-
-        const walker = document.createTreeWalker(
-            document.body,
-            NodeFilter.SHOW_TEXT,
-            {
-                acceptNode(node) {
-
-                    const parent = node.parentElement;
-
-                    if (!parent) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-
-                    // Script va style ichidagi textlarni o'tkazib yuboramiz
-                    if (
-                        parent.tagName === "SCRIPT" ||
-                        parent.tagName === "STYLE"
-                    ) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-
-                    if (!node.nodeValue.trim()) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-
-                    return NodeFilter.FILTER_ACCEPT;
-                }
-            }
-        );
-
-
-        const nodes = [];
-
-        let node;
-
-        while (node = walker.nextNode()) {
-            nodes.push(node);
-        }
-
-
-        nodes.forEach(textNode => {
-
-            if (!textNode.datasetOriginal) {
-                textNode.datasetOriginal = textNode.nodeValue;
-            }
-
-            const original = textNode.datasetOriginal.trim();
-
-            if (dictionary[original]) {
-
-                const leadingSpace =
-                    textNode.nodeValue.match(/^\s*/)?.[0] || "";
-
-                const trailingSpace =
-                    textNode.nodeValue.match(/\s*$/)?.[0] || "";
-
-                textNode.nodeValue =
-                    leadingSpace +
-                    dictionary[original] +
-                    trailingSpace;
-            }
-            else {
-
-                // English ga qaytishda original text
-                textNode.nodeValue = textNode.datasetOriginal;
+            if (text !== undefined) {
+                el.textContent = text;
             }
         });
     }
 
 
-    // ==========================================
-    // INPUT PLACEHOLDERLAR
-    // ==========================================
+    /* ================= LANGUAGE ================= */
 
-    function translateInputs(language) {
-
-        const dictionary = translations[language];
-
-        document.querySelectorAll("input").forEach(input => {
-
-            if (!input.dataset.originalPlaceholder) {
-                input.dataset.originalPlaceholder =
-                    input.placeholder;
-            }
-
-            const original =
-                input.dataset.originalPlaceholder;
-
-            if (dictionary[original]) {
-                input.placeholder = dictionary[original];
-            } else {
-                input.placeholder = original;
-            }
-
-        });
-    }
-
-
-    // ==========================================
-    // SELECT
-    // ==========================================
-
-    const languageSelect =
+    const select =
         document.getElementById("languageSelect");
 
 
-    function changeLanguage(language) {
+    if (select) {
 
-        translateTextNodes(language);
-        translateInputs(language);
+        select.addEventListener("change", e => {
 
-        document.documentElement.lang = language;
+            const language = e.target.value;
 
-        localStorage.setItem(
-            "selectedLanguage",
-            language
-        );
+            localStorage.setItem(
+                "language",
+                language
+            );
+
+            translate(language);
+
+        });
     }
-
-
-    // ==========================================
-    // SELECT EVENT
-    // ==========================================
-
-    if (languageSelect) {
-
-        languageSelect.addEventListener(
-            "change",
-            function () {
-
-                changeLanguage(this.value);
-
-            }
-        );
-
-    }
-
-
-    // ==========================================
-    // SAQLANGAN TILNI YUKLASH
-    // ==========================================
-
-    const savedLanguage =
-        localStorage.getItem("selectedLanguage") || "en";
-
-
-    if (languageSelect) {
-        languageSelect.value = savedLanguage;
-    }
-
-
-    changeLanguage(savedLanguage);
-
 });
