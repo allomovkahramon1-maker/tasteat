@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
+
+
     /* ================= TRANSLATIONS ================= */
  
     const translations = {
@@ -414,4 +414,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
     }
-});
