@@ -392,9 +392,8 @@
         });
     }
 
-
-    /* ================= LANGUAGE ================= */
-
+/* ================= LANGUAGE ================= */
+    
     const select =
         document.getElementById("languageSelect");
 
@@ -414,3 +413,4 @@
 
         });
     }
+
