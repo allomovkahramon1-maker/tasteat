@@ -786,7 +786,6 @@ p {
 
 .section__card img {
     width: 100%;
-    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
@@ -931,9 +930,8 @@ p {
 
 .card__section:hover .card__btn {
     opacity: 1;
-    
+
 }
-/*  */
 .delicius__text {
     display: flex;
     align-items: center;
