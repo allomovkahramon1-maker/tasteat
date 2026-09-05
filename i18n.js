@@ -379,38 +379,36 @@
 
     /* ================= TRANSLATE ================= */
 
-    function translate(language) {
+function translate(language) {
+    document.querySelectorAll("[data-key]").forEach(el => {
+        const key = el.dataset.key;
+        const text = translations[language]?.[key];
 
-        document.querySelectorAll("[data-key]").forEach(el => {
-
-            const key = el.dataset.key;
-            const text = translations[language]?.[key];
-
-            if (text !== undefined) {
-                el.textContent = text;
-            }
-        });
-    }
+        if (text !== undefined) {
+            el.textContent = text;
+        }
+    });
+}
 
 /* ================= LANGUAGE ================= */
-    
-    const select =
-        document.getElementById("languageSelect");
+
+const select = document.getElementById("languageSelect");
+
+if (select) {
+    // default English
+    const savedLanguage = localStorage.getItem("language") || "en";
 
 
-    if (select) {
+    select.value = savedLanguage;
 
-        select.addEventListener("change", e => {
 
-            const language = e.target.value;
+    translate(savedLanguage);
 
-            localStorage.setItem(
-                "language",
-                language
-            );
+    select.addEventListener("change", e => {
+        const language = e.target.value;
 
-            translate(language);
+        localStorage.setItem("language", language);
 
-        });
-    }
-
+        translate(language);
+    });
+}

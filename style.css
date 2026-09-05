@@ -925,8 +925,6 @@ p {
     transition: 0.3s ease;
 }
 
-
-
 .card__section:hover img {
     opacity: 0.8;
 }
@@ -935,7 +933,7 @@ p {
     opacity: 1;
     
 }
-
+/*  */
 .delicius__text {
     display: flex;
     align-items: center;
@@ -989,7 +987,7 @@ p {
     width: 100%;
     max-width: 850px;
     padding: 70px 80px;
-    background: rgba(25, 31, 39, 0.94);
+    background: rgba(27, 31, 39, 0.94);
     color: #fff;
     text-align: center;
 }
