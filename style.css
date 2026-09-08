@@ -1272,7 +1272,7 @@ input::placeholder {
         grid-template-columns: 1fr 1fr;
         gap: 40px;
     }
-
+/*  */
     .footer__center {
         grid-column: span 2;
         grid-row: 1;
