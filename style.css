@@ -1190,13 +1190,11 @@ input::placeholder {
 .footer__social img {
     width: 18px;
     height: 18px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
     transition: 0.3s;
 }
 
 .footer__social img:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
 .footer__hours {
@@ -1272,7 +1270,7 @@ input::placeholder {
         grid-template-columns: 1fr 1fr;
         gap: 40px;
     }
-/*  */
+
     .footer__center {
         grid-column: span 2;
         grid-row: 1;
@@ -1780,14 +1778,12 @@ input::placeholder {
     color: #e6e6e6;
     font-family: Georgia, serif;
     font-size: 20px;
-    white-space: nowrap;
+    
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+   /* RESPONSIVE */
 
-/* TABLET */
+/* planshet */
 @media (max-width: 900px) {
 
     .section__menu {
@@ -1853,7 +1849,7 @@ input::placeholder {
 }
 
 
-/* TELEFONlar */
+/* telefonlar */
 @media (max-width: 600px) {
 
     .section5 {
