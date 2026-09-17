@@ -879,7 +879,7 @@ p {
 
 }
 
-/* footer qismiga yaxshiroq responsive yoz */
+
 .delicius__text {
     display: flex;
     align-items: center;
@@ -1225,6 +1225,8 @@ input::placeholder {
 .footer__links a:hover {
     color: #fff;
 }
+
+/* footer responsive */
 
 @media (max-width: 1200px) {
     .footer__top {
