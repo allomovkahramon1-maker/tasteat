@@ -2698,7 +2698,7 @@ input::placeholder {
         gap: 15px;
     }
 
-    /* BOTTOM */
+    /*  */
 
     .footer__bottom-inner {
         width: calc(100% - 30px);
@@ -2782,7 +2782,6 @@ input::placeholder {
         font-size: 11px;
     }
 }
-
 
 /* responsive 360px da */
 
