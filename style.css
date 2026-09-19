@@ -806,10 +806,15 @@ p {
     width: 55%;
 }
 
+.card h4{
+    text-align: center;
+}
+
 .card {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    align-items: center;
 }
 
 .card img {

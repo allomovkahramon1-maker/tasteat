@@ -238,6 +238,8 @@
 
 @media (max-width: 900px) {
 
+
+
     .container {
         width: 92%;
     }
@@ -256,6 +258,12 @@
         justify-content: center;
     }
 
+    .d-fex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     /*  */
 
     .section__main {
@@ -265,6 +273,8 @@
     }
 
     .section__div1 {
+        display: flex;
+        flex-direction: column;
         align-items: center;
     }
 
@@ -311,6 +321,20 @@
 
     .u__text {
         justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .section__burg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section__burger {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .section__josefine {
@@ -548,6 +572,12 @@
         line-height: 1.6;
     }
 
+    .section__stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     /*  */
 
     .section__open {
@@ -645,6 +675,12 @@
     }
 
     /*  */
+
+    .d-fex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     .section__main2 {
         padding: 35px 0;
@@ -891,6 +927,12 @@
 
     /*  */
 
+    .d-fex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .testimonial-card {
         padding: 18px;
     }
@@ -948,6 +990,12 @@
 
     .section__raw p {
         font-size: 10px;
+    }
+
+    .d-fex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .section__flex img {
@@ -1041,6 +1089,12 @@
     .reservation form button {
         width: 100%;
         height: 55px;
+    }
+
+    .d-fex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -1263,6 +1317,12 @@
         justify-content: flex-end;
     }
 
+    .footer__hours {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     /* BOTTOM */
 
     .footer__bottom-inner {
@@ -1402,6 +1462,10 @@
 
 @media (max-width: 360px) {
 
+    .body{
+        padding-inline: 30px;
+    }
+    
     .footer__top {
         width: calc(100% - 20px);
         gap: 32px;
