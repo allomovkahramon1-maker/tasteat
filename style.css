@@ -799,7 +799,7 @@ p {
 .section__stage p {
     margin-top: 20px;
     color: #ddd;
-    line-height: 1.7;
+    line-height: 1.7px;
 }
 
 .section__open {
