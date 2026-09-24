@@ -396,7 +396,6 @@ function translate(language) {
 
 const select = document.getElementById("languageSelect");
 
-
 if (select) {
 
     select.addEventListener("change", e => {
