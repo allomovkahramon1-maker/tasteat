@@ -534,13 +534,16 @@
     .footer__contact {
         align-items: center;
     }
-
+    .footer__contact h3{
+        margin-block: 30px;
+    }
     .footer__hours {
         text-align: center;
     }
 
     .footer__social {
         justify-content: center;
+        margin-bottom: 30px;
     }
 
     .footer__bottom-inner {
