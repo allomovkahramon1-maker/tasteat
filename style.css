@@ -10,6 +10,10 @@ body {
     background: #fff;
 }
 
+main {
+    overflow-x: hidden;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -775,23 +779,25 @@ p {
 }
 
 .section__stage {
-    width: 40%;
+    width: 60%;
 }
 
 .section__stage h1 {
     font-weight: 400;
 }
 
+
+
 .qwerty {
     width: max-content;
     border-top: 1px solid #e1b168;
     border-bottom: 1px solid #e1b168;
     padding: 10px 0;
-    font-size: 18px !important;
+    
 }
 
 .asdfg {
-    margin-top: 25px;
+    margin-block: 25px;
     font-family: Georgia, "Times New Roman", serif;
     font-size: 45px;
 }
