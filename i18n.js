@@ -398,7 +398,7 @@ const select = document.getElementById("languageSelect");
 
 if (select) {
 
-    select.addEventListener("change", e => {
+    select.addEventListener("click", e => {
 
         const language = e.target.value;
 
