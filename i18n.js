@@ -377,7 +377,6 @@ const translations = {
 };
 
 /* ================= TRANSLATE ================= */
-
 function translate(language) {
 
     document.querySelectorAll("[data-key]").forEach(el => {
