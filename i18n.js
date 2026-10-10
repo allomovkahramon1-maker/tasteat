@@ -412,25 +412,3 @@ if (select) {
     });
 }
 
-
-
-// animatsiya js
-
-const elements = document.querySelectorAll(
-    ".animate, .animate-left, .animate-right, .animate-zoom"
-);
-
-function animateElements() {
-    elements.forEach((element) => {
-        const top = element.getBoundingClientRect().top;
-
-        if (top < window.innerHeight - 100) {
-            element.classList.add("show");
-        } else {
-            element.classList.remove("show");
-        }
-    });
-}
-
-window.addEventListener("scroll", animateElements);
-animateElements();

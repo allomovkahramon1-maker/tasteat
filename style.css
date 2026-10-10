@@ -1279,37 +1279,3 @@ input::placeholder {
     height: 100%;
     object-fit: cover;
 }
-
-/* animatsiya lar qismi */
-
-.animate,
-.animate-left,
-.animate-right,
-.animate-zoom {
-    opacity: 0;
-    transition: 0.6s ease;
-}
-
-.animate {
-    transform: translateY(50px);
-}
-
-.animate-left {
-    transform: translateX(-60px);
-}
-
-.animate-right {
-    transform: translateX(60px);
-}
-
-.animate-zoom {
-    transform: scale(0.8);
-}
-
-.animate.show,
-.animate-left.show,
-.animate-right.show,
-.animate-zoom.show {
-    opacity: 1;
-    transform: translate(0) scale(1);
-}
