@@ -376,7 +376,6 @@ const translations = {
     }
 };
 
-
 /* ================= TRANSLATE ================= */
 
 function translate(language) {
